@@ -5,9 +5,11 @@ from torch import nn
 # Define models
 
 class CNN(nn.Module):
-    '''
-    Convolutional network class
-    '''
+    """Example from lessions
+
+    Args:
+        nn (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
 
@@ -39,9 +41,11 @@ class CNN(nn.Module):
 
 
 class BRBSequentialLow(nn.Module):
-    '''
-    Just lineair network class
-    '''
+    """Very 'unintelligent' model to see how quickly a model reaches a limit
+
+    Args:
+        nn (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
 
@@ -58,9 +62,11 @@ class BRBSequentialLow(nn.Module):
 
 
 class BRBSequentialHigh(nn.Module):
-    '''
-    Just lineair network class
-    '''
+    """Test to attempt to quickly overfit a model
+
+    Args:
+        nn (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
 
@@ -87,10 +93,13 @@ class BRBSequentialHigh(nn.Module):
         logits = self.dense(x)
         return logits
 
+
 class BRBSequentialVariable(nn.Module):
-    '''
-    Just lineair network class
-    '''
+    """Attempts to create a more balanced lineair class
+
+    Args:
+        nn (_type_): _description_
+    """
     def __init__(self):
         super().__init__()
 
@@ -98,7 +107,7 @@ class BRBSequentialVariable(nn.Module):
             nn.Flatten(),
             nn.Linear(784, 392),
             nn.ReLU(),
-            nn.Linear(392, 32),
+            nn.Linear(392, 32), 
             nn.ReLU(),
             nn.Linear(32, 128),
             nn.ReLU(),
@@ -112,6 +121,10 @@ class BRBSequentialVariable(nn.Module):
 
 @gin.configurable
 def TestGin(testText: str):
+    """
+    Quick test to test gin
+
+    Args:
+        testText (str): _description_
+    """
     print(testText)
-
-

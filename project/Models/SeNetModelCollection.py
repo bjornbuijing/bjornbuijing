@@ -7,7 +7,7 @@ import torch
 
 class SeREs(nn.Module):
     '''
-    Se net implementation
+    Se net implementation, not working as of yet
     '''
     def __init__(self, kernel: tuple, units: int, sqfactor=16):
         super().__init__()
@@ -32,10 +32,18 @@ class SeREs(nn.Module):
 
 
 class SeREs2(nn.Module):
-    '''
-    Convolutional network class
-    '''
-    def __init__(self, inputsize, rate=16):
+    """_summary_
+
+    Args:
+        nn (_type_): _description_
+    """
+    def __init__(self, inputsize: int, rate: int = 16):
+        """_summary_
+
+        Args:
+            inputsize (int): Size of the image
+            rate (int, optional): squeeze/exite ratio . Defaults to 16.
+        """
         super().__init__()
         self.Squeeze = nn.AdaptiveAvgPool2d(1)
         self.excite = nn.Sequential(
@@ -46,6 +54,14 @@ class SeREs2(nn.Module):
         )
 
     def forward(self, x):
+        """_summary_
+
+        Args:
+            x (_type_): item which is handles
+
+        Returns:
+            _type_: squeezed and exited item
+        """
         bs, c, _, _ = x.shape
         out = self.Squeeze(x).view(bs, c)
         out = torch.flatten(out, 1)
