@@ -1,0 +1,7 @@
+# Parameters for RunTrainer:
+# ==============================================================================
+RunTrainer.log_dir = '..\\trained_models\\'
+
+# Parameters for TestGin:
+# ==============================================================================
+TestGin.testText = 'PLEASE DO SOMETHING ELSE!!!!!!!!'
