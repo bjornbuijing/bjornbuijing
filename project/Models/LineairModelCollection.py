@@ -104,6 +104,7 @@ class BRBSequentialVariable(nn.Module):
         super().__init__()
 
         self.lin = nn.Sequential(
+            nn.Dropout(),
             nn.Flatten(),
             nn.Linear(784, 392),
             nn.ReLU(),
@@ -111,7 +112,8 @@ class BRBSequentialVariable(nn.Module):
             nn.ReLU(),
             nn.Linear(32, 128),
             nn.ReLU(),
-            nn.Linear(128, 10)
+            nn.Linear(128, 10),
+            
         )
 
     def forward(self, x):

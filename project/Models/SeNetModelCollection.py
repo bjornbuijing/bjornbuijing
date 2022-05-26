@@ -1,3 +1,4 @@
+from matplotlib.pyplot import ylabel
 from sqlalchemy import true
 from torch import nn
 import torch
@@ -67,3 +68,30 @@ class SeREs2(nn.Module):
         out = torch.flatten(out, 1)
         out = self.excite(out).view(bs, c, 1, 1)
         return x * out.expand_as(x)
+
+
+class BRBSequentialVariable(nn.Module):
+    """Attempts to create a more balanced lineair class
+
+    Args:
+        nn (_type_): _description_
+    """
+    def __init__(self) -> None:
+        super().__init__()
+        self.seNet = SeREs(kernel=784, sqfactor=16)
+        self.lin = nn.Sequential(
+            nn.Dropout(),
+            nn.Flatten(),
+            nn.Linear(784, 392),
+            nn.ReLU(),
+            nn.Linear(392, 32), 
+            nn.ReLU(),
+            nn.Linear(32, 128),
+            nn.ReLU(),
+            nn.Linear(128, 10),
+        )
+
+    def forward(self, x):
+        y = self.seNet.forward(x)
+        y = self.lin(y)
+        return y
